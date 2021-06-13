@@ -4,12 +4,15 @@
 
 // connect db
 $servername = "localhost";
-$username = "root";
-$password = "jakarta123";
-$database = "finhack-transfer";
+$username = "userdb";
+$password = "pwddb";
+$database = "db";
+
+$list_table = array("");
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
+
 
 // Check connection
 if ($conn->connect_error) {
@@ -18,13 +21,10 @@ if ($conn->connect_error) {
 
 $conn->select_db($database);
 
-$list_table = array("bank","switching","transfer");
-
 $obj = new \stdClass;
 
 // query data
 foreach ($list_table as $key => $value) {
-    // echo $value."\n";
     $q = "select * from ".$value;
     $result = $conn->query($q);
     $result_obj = $result->fetch_all(MYSQLI_ASSOC);
